@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "pG7Ig6dZmFPzOZ6PTEh5TIFHvZ+QRexLDtXtsTCZimTjQtf2EaGwlvrc+gjFTE0D/w8VIe7CFZJBnA8rp+fiLw==",
+  "success": true,
+  "projectFilePath": "C:\\Projects\\OpenAiToy\\OpenAiToy\\JiraGPTGrader\\JiraGPTGrader.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\restsharp\\112.0.0\\restsharp.112.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
