@@ -11,8 +11,8 @@ namespace JiraGPTGrader
             // Example usage
             string jiraBaseUrl = "https://freightpop.atlassian.net";
             List<string> issueKeys = new List<string> { "DA-1896", "DA-1897", "DA-1898" };
-            string jiraUsername = "jackp@freightpop.com";
-            string jiraApiToken = Environment.GetEnvironmentVariable("Jira");
+            string jiraUsername = "jiraapiuser@freightpop.com";
+            string jiraApiToken = "ATATT3xFfGF0ju8nEW57JWBre8tn6nK5mmLyTWrqMBZNTfH2rX9EBm29R0J9uRO4v5n-jYbQ9hiYZR6BxOPjJFOYC6qfNfW5IjlHv1v9GY81tCrBpOFqFn3MusQ1-PMKG6_5RkDqeMj4Ku-T8gCAeYAZlTSRlltOnoWnCw8n1IKE-BVUiDRJ1Yc=0ED9CB68";
             string openAiApiKey = Environment.GetEnvironmentVariable("Chatgpt");
              
             var jiraClient = new JiraClient(jiraBaseUrl, jiraUsername, jiraApiToken);
