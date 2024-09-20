@@ -36,9 +36,9 @@ namespace JiraGPTGrader
                     StoryFeedback feedback = await _gptClient.GradeStoryWithGPT(title, description);
 
                     // Define the necessary parameters for updating Jira
-                    string jiraBaseUrl = "https://your-jira-base-url"; // Replace with actual Jira base URL
-                    string username = "your-username"; // Replace with actual username
-                    string apiToken = "your-api-token"; // Replace with actual API token
+                    string jiraBaseUrl = "https://freightpop.atlassian.net";
+                    string username = "jackp@freightpop.com";
+                    string apiToken = Environment.GetEnvironmentVariable("Jira");
 
                     // Update the Jira ticket with GPT rating and feedback
                     _jiraClient.UpdateJiraStoryWithFeedback(jiraBaseUrl, issueKey, username, apiToken, feedback.Score, feedback.Feedback);

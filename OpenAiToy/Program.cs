@@ -14,7 +14,7 @@ namespace JiraGPTGrader
             string jiraUsername = "jackp@freightpop.com";
             string jiraApiToken = Environment.GetEnvironmentVariable("Jira");
             string openAiApiKey = Environment.GetEnvironmentVariable("Chatgpt");
-
+             
             var jiraClient = new JiraClient(jiraBaseUrl, jiraUsername, jiraApiToken);
             var gptClient = new GPTClient(openAiApiKey);
             var storyGrader = new StoryGrader(jiraClient, gptClient);
@@ -26,6 +26,7 @@ namespace JiraGPTGrader
             string filePath = "C:\\Projects\\OpenAiToy\\Logs for files changed\\StoryFeedback.xlsx";
             ExcelExporter.ExportToExcel(filePath, feedbacks);
 
+            Console.WriteLine();
             Console.WriteLine($"Results exported to {filePath}");
             Console.ReadLine();
         }

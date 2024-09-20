@@ -58,10 +58,11 @@ namespace JiraGPTGrader
             {
                 fields = new
                 {
-                    customfield_10390 = new
-                    {
-                        value = gptRating.ToString()  // Assuming customfield_10390 expects a value
-                    }
+                    customfield_10390 = new[]
+           {
+                new { value = gptRating.ToString() }  // Sending GPT Rating as an array
+            },
+                    customfield_10391 = feedback // Assuming customfield_10391 expects a string for feedback
                 }
             };
 
