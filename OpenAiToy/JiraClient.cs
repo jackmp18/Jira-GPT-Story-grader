@@ -58,7 +58,11 @@ namespace JiraGPTGrader
             {
                 fields = new
                 {
-                    customfield_10391 = $"Score: {score}\nFeedback: {feedback}"
+                    customfield_10390 = new[]
+                        {
+                            new { value = score.ToString() } // Wrap score as a string inside an object in an array
+                        },
+                    customfield_10391 = "Feedback: {feedback}"
                 }
             };
 
