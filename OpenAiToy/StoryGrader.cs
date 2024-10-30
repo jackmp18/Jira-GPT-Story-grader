@@ -33,12 +33,13 @@ namespace JiraGPTGrader
                     }
 
                     // Send the details to GPT for grading
-                    StoryFeedback feedback = await _gptClient.GradeStoryWithGPT(title, description);
+                    string issueType = _jiraClient.GetJiraIssueType(issueKey);
+                    StoryFeedback feedback = await _gptClient.GradeStoryWithGPT(title, description, issueType);
 
                     // Define the necessary parameters for updating Jira
                     string jiraBaseUrl = "https://freightpop.atlassian.net";
                     string username = "jiraapiuser@freightpop.com";
-                    string apiToken = Environment.GetEnvironmentVariable("Jira");;
+                    string apiToken = "ATATT3xFfGF0ju8nEW57JWBre8tn6nK5mmLyTWrqMBZNTfH2rX9EBm29R0J9uRO4v5n-jYbQ9hiYZR6BxOPjJFOYC6qfNfW5IjlHv1v9GY81tCrBpOFqFn3MusQ1-PMKG6_5RkDqeMj4Ku-T8gCAeYAZlTSRlltOnoWnCw8n1IKE-BVUiDRJ1Yc=0ED9CB68";
 
                     // Update the Jira ticket with GPT rating and feedback
                     _jiraClient.UpdateJiraStoryWithFeedback(jiraBaseUrl, issueKey, username, apiToken, feedback.Score, feedback.Feedback);

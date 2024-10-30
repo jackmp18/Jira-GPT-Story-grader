@@ -14,16 +14,16 @@ namespace JiraGPTGrader
             _chatClient = new ChatClient("gpt-4o-mini", new System.ClientModel.ApiKeyCredential(apiKey));
         }
 
-        public async Task<StoryFeedback> GradeStoryWithGPT(string title, string storyDescription)
+        public async Task<StoryFeedback> GradeStoryWithGPT(string title, string storyDescription, string issueType)
         {
             try
             {
                 List<ChatMessage> messages = new List<ChatMessage>
                 {
-                    new SystemChatMessage(@"You are a tool designed to help us create better agile stories by grading them on a 1-5 scale (1=VeryBad, 2=Bad, 3=Neutral, 4=Good, 5=VeryGood) and providing brief feedback. Please assess the stories based on the following criteria and provide your evaluation accordingly.
+                    new SystemChatMessage(@"You are a tool designed to help us create better agile stories and bugs by grading them on a 1-5 scale (1=VeryBad, 2=Bad, 3=Neutral, 4=Good, 5=VeryGood) and providing brief feedback. Please assess the stories based on the following criteria and provide your evaluation accordingly.
 
                         Grading Criteria:
-                        1. **Clarity**: Is the story clear and easily understandable? Does it avoid ambiguity and provide a straightforward description of the requirements? Consider if the story uses precise language and avoids jargon that might confuse developers or stakeholders. Does the story explain the purpose of the feature or task?
+                        1. **Clarity**: Is the story clear and easily understandable? Does it avoid ambiguity and provide a straightforward description of the requirements? Consider if the story uses precise language and avoids jargon that might confuse developers or stakeholders. Does the story explain the purpose of the feature or task? Jargon is ok for this orginization.
 
                         2. **Completeness**: Does the story include all necessary details for implementation? Check if it specifies all functional and non-functional requirements. Are acceptance criteria, solution steps, dependencies, and any relevant notes or backstories clearly provided? Does the story leave room for questions, or is everything included to ensure smooth execution?
 
@@ -38,7 +38,7 @@ namespace JiraGPTGrader
 
                 };
 
-                messages.Add(new UserChatMessage($"Grade this Jira story with title \"{title}\" and description: \"{storyDescription}\". Provide feedback on its clarity, completeness, and any missing details. Please format the response as a JSON object with the following structure and be sure to no include any extra symbols after }} such as ''': {{ \"Score\": <number>, \"Feedback\": \"<text>\" }}"));
+                messages.Add(new UserChatMessage($"Grade this Jira \"{issueType}\" with title \"{title}\" and description: \"{storyDescription}\". Provide feedback on its clarity, completeness, and any missing details. Please format the response as a JSON object with the following structure and be sure to no include any extra symbols after }} such as ''': {{ \"Score\": <number>, \"Feedback\": \"<text>\" }}"));
 
                 var result = await _chatClient.CompleteChatAsync(messages);
                 string jsonResponse = result.Value.Content[0].Text;
@@ -58,5 +58,33 @@ namespace JiraGPTGrader
                 throw new Exception($"Failed to get GPT response: {ex.Message}");
             }
         }
+        public async Task<string> GenerateTestCasesAndAcceptanceCriteria(string title, string storyDescription)
+        {
+            List<ChatMessage> messages = new List<ChatMessage>
+            {
+                new SystemChatMessage(@"You are a tool designed to help us generate test cases and acceptance criteria based on agile stories."),
+                new UserChatMessage($@"
+                    Generate test cases and acceptance criteria for the Jira story with title ""{title}"" and description: ""{storyDescription}"".
+
+                    Format the output in the following way:
+
+                    Acceptance Criteria:
+                    - [Criterion 1]
+                    - [Criterion 2]
+                    - [Criterion 3]
+                    - ...
+
+                    How to test:
+                    - [Test Step 1]
+                    - [Test Step 2]
+                    - [Test Step 3]
+                    - ...
+                    ")
+                };
+
+            var result = await _chatClient.CompleteChatAsync(messages);
+            return result.Value.Content[0].Text; // Return the generated content
+        }
+
     }
 }
