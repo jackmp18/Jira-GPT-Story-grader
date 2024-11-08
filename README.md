@@ -32,7 +32,7 @@ Bug Reduction: Fewer bugs lead to cost savings on post-release fixes and improve
 Productivity Gains: Automated grading and test case generation save hours of manual work, reducing labor costs and allowing POs to focus on higher-priority tasks.
 Customer Retention: Improved product quality strengthens customer loyalty, protecting revenue streams and lowering churn rates.
 
-Configuration
+# Configuration
 Before running the project, you need to create a configuration file named appsettings.json in the root directory of the project. This file stores sensitive information such as Jira and OpenAI API credentials.
 
 Example appsettings.json
@@ -47,9 +47,6 @@ Copy code
 Security Note
 Make sure to add appsettings.json to your .gitignore file to prevent it from being included in version control:
 
-bash
-Copy code
-# .gitignore
 appsettings.json
 Setting Up Credentials
 JiraBaseUrl: Your Jira instance base URL (e.g., https://yourcompany.atlassian.net).
