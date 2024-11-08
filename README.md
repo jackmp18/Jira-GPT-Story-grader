@@ -32,6 +32,32 @@ Bug Reduction: Fewer bugs lead to cost savings on post-release fixes and improve
 Productivity Gains: Automated grading and test case generation save hours of manual work, reducing labor costs and allowing POs to focus on higher-priority tasks.
 Customer Retention: Improved product quality strengthens customer loyalty, protecting revenue streams and lowering churn rates.
 
+Configuration
+Before running the project, you need to create a configuration file named appsettings.json in the root directory of the project. This file stores sensitive information such as Jira and OpenAI API credentials.
+
+Example appsettings.json
+json
+Copy code
+{
+  "JiraBaseUrl": "https://your-jira-instance.atlassian.net",
+  "JiraUsername": "your-jira-username",
+  "JiraApiToken": "your-jira-api-token",
+  "OpenAiApiKey": "your-openai-api-key"
+}
+Security Note
+Make sure to add appsettings.json to your .gitignore file to prevent it from being included in version control:
+
+bash
+Copy code
+# .gitignore
+appsettings.json
+Setting Up Credentials
+JiraBaseUrl: Your Jira instance base URL (e.g., https://yourcompany.atlassian.net).
+JiraUsername: Your Jira username used for API authentication.
+JiraApiToken: A Jira API token generated from your Jira account.
+OpenAiApiKey: Your OpenAI API key.
+
+
 📂 OpenAiTool
 ├── 📄 ExcelExporter.cs       # Handles exporting Jira story data and feedback to Excel files
 ├── 📄 GPTClient.cs           # Manages interactions with the GPT API for story grading and feedback
